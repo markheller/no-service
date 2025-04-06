@@ -10,6 +10,13 @@
     --caption-font-size: 12px;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -364,7 +371,7 @@ footer {
         position: static;
         z-index: 1000;
         flex-shrink: 0;
-        padding-right: 20px;
+        margin-right: 20px;
     }
 
     .menu-icon {
@@ -403,24 +410,17 @@ footer {
         min-width: 0;
         margin-left: 0;
         padding: 20px;
-        padding-top: 80px;
+        padding-top: 70px;
     }
     
     .project {
         display: block;
-        /* Stack text and image vertically */
     }
-
-    /* .project-arrow-top,
-    .project-arrow-bottom {
-        display: block;
-    } */
 
     .project .text,
     .project .image,
     .project .image img {
         width: 100%;
-        /* Make both text and image full width */
         padding-right: 0;
         padding-left: 0;
         margin-top: 0;
