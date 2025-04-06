@@ -324,6 +324,17 @@ footer {
         max-width: 100%;
         overflow-wrap: break-word;
         word-wrap: break-word;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .header h1 {
+        display: inline-block;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+        margin: 10px;
+        padding: 0px;
     }
 
     .main-content {
