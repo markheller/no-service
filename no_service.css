@@ -289,6 +289,20 @@ footer {
     flex-direction: column;
 }
 
+.menu-button {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+}
+
+.menu-overlay {
+    display: none;
+
+}
+
+
 
 /* ////// */
 /* MOBILE */
@@ -313,19 +327,26 @@ footer {
         display: block;
     }
 
-    .sidebar {
-        display: none;
-        /* Hide the sidebar on mobile */
-    }
-
     .header {
-        display: block;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
         max-width: 100%;
         overflow-wrap: break-word;
         word-wrap: break-word;
-        margin-left: 10px;
-        margin-right: 10px;
+        padding: 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--background-color);
+        z-index: 1500;
+        border-bottom: 0.5px solid var(--border-color);
+    }
+
+    .header-content {
+        text-align: left;
+        flex-grow: 1;
     }
 
     .header h1 {
@@ -333,8 +354,8 @@ footer {
         word-break: break-word;
         overflow-wrap: break-word;
         max-width: 100%;
-        margin: 10px;
-        padding: 0px;
+        margin: 10px 0;
+        padding-left: 10px;
     }
 
     .header h3 {
@@ -342,21 +363,71 @@ footer {
         word-break: break-word;
         overflow-wrap: break-word;
         max-width: 100%;
-        margin: 10px;
-        padding: 0px;
+        /* margin: 10px 0; */
+        padding: 0;
+    }
 
+    .header hr {
+        position: fixed;
+        top: 100px; /* Adjust based on your header height */
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1500;
+    }
+
+    .menu-button {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        /* padding: 5px; */
+        /* margin: 0 0 0 15px; */
+        position: static;
+        z-index: 1000;
+        flex-shrink: 0;
+        padding-right: 20px;
+    }
+
+    .menu-icon {
+        width: 24px;
+        height: 24px;
+        display: block;
+    }
+
+    .sidebar {
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+        z-index: 2001;
+        background-color: rgba(0, 0, 0, 0.95);
+        border: none;
+    }
+
+    .sidebar.mobile-visible {
+        background-color: rgba(0, 0, 0, 0.95);
+        display: flex !important;
+        transform: translateX(0);
+        border: none;
+    }
+
+    .menu-overlay.active {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
     }
 
     .main-content {
         min-width: 0;
-        /* width: 100%; */
-        /* Take up the full width */
         margin-left: 0;
-        /* Remove the left margin */
         padding: 20px;
-        /* Add some padding for better spacing */
+        padding-top: 80px;
     }
-
+    
     .project {
         display: block;
         /* Stack text and image vertically */
