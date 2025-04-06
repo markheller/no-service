@@ -467,8 +467,7 @@ footer {
         margin-left: 10vw;
     }
 
-    .caption {
-        font-size: 1.2rem;
-        
+    body {
+        font-size: 1rem;
     }
 }
