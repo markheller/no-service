@@ -464,7 +464,7 @@ footer {
 
 @media (max-width: 768px) and (orientation: landscape) {
     body {
-        font-size: 85%;
+        font-size: 75%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -473,7 +473,37 @@ footer {
 
     .main-content, .header, .sidebar {
         max-width: 600px;
-        width: 100%;
+        width: 75%;
+    }
+
+       .project {
+        display: block;
+    }
+
+    .sidebar,
+    .sidebar.mobile-visible,
+    .project .text,
+    .project .image,
+    .project .image img,
+    .about-page,
+    .project-page,
+    .media-container,
+    .project-header,
+    .project-description,
+    .media-container,
+    .video-container-consistent,
+    .video-container-consistent iframe,
+    .video-container-variable,
+    .video-container-variable iframe,
+    .project-img,
+    .project-img img,
+    .caption {
+        max-width: 600px;
+        width: 75%;
+    }
+
+    .caption {
+        font-size: 75%;
     }
 
     .header {
