@@ -44,6 +44,10 @@ body .blue {
     align-self: flex-start;
 }
 
+.header {
+    display: none;
+}
+
 .sidebar .about {
     margin-top: auto;
     padding-bottom: 35px;
@@ -54,6 +58,10 @@ body .blue {
     height: 0px;
     border: none;
     border-top: 1px solid var(--border-color);
+}
+
+.header hr {
+    margin-bottom: 0px;
 }
 
 /* //////// */
@@ -308,6 +316,11 @@ footer {
     .sidebar {
         display: none;
         /* Hide the sidebar on mobile */
+    }
+
+    .header {
+        display: block;
+        text-align: center;
     }
 
     .main-content {
