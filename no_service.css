@@ -459,11 +459,11 @@ footer {
     .footer-text {
         display:block;
     }
-    
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
-    html, body {
-        width: 75%;
+    .main-content, .header {
+        width: 80%;
+        margin-left: 10vw;
     }
 }
