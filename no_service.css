@@ -463,5 +463,7 @@ footer {
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
-
+    html, body {
+        width: 75%;
+    }
 }
