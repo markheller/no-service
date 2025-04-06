@@ -302,8 +302,6 @@ footer {
 
 }
 
-
-
 /* ////// */
 /* MOBILE */
 /* ////// */
@@ -358,31 +356,11 @@ footer {
         padding-left: 10px;
     }
 
-    .header h3 {
-        display: inline-block;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        max-width: 100%;
-        /* margin: 10px 0; */
-        padding: 0;
-    }
-
-    .header hr {
-        position: fixed;
-        top: 100px; /* Adjust based on your header height */
-        left: 0;
-        right: 0;
-        width: 100%;
-        z-index: 1500;
-    }
-
     .menu-button {
         display: block;
         background: none;
         border: none;
         cursor: pointer;
-        /* padding: 5px; */
-        /* margin: 0 0 0 15px; */
         position: static;
         z-index: 1000;
         flex-shrink: 0;
