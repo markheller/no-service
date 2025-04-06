@@ -313,7 +313,9 @@ footer {
 /* MOBILE */
 /* ////// */
 
-@media (max-width: 768px) {
+@media (max-width: 512px) {
+
+    /* 768px */
 
     html {
         width: 100%;
