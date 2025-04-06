@@ -463,11 +463,11 @@ footer {
 
 @media (max-width: 768px) and (orientation: landscape) {
     .main-content, .header {
-        width: 80%;
+        width: 75%;
         margin-left: 10vw;
     }
 
     body {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 }
