@@ -314,7 +314,7 @@ footer {
 /* MOBILE */
 /* ////// */
 
-@media (max-width: 812px) {
+@media (max-width: 768px) {
 
     html {
         width: 100%;
@@ -466,5 +466,9 @@ footer {
     .main-content, .header {
         width: 65%;
         margin-left: 10vw;
+    }
+
+    body, .caption {
+        font-size: 10px;
     }
 }
