@@ -13,7 +13,7 @@
         const sidebar = document.querySelector('.sidebar');
         const overlay = document.querySelector('.menu-overlay');
         const isVisible = sidebar.classList.contains('mobile-visible');
-    
+
         if (isVisible) {
             closeSidebar();
         } else {
@@ -21,12 +21,12 @@
             overlay.classList.add('active');
         }
     }
-    
+
     function closeSidebar() {
         document.querySelector('.sidebar').classList.remove('mobile-visible');
         document.querySelector('.menu-overlay').classList.remove('active');
     }
-    </script>
+</script>
 
 <body>
     <div class="container">
@@ -52,14 +52,14 @@
                 <h3><a href="about.html">About</a></h3>
             </div>
         </aside>
-        
+
         <aside class="header">
             <div class="header-content">
                 <h1><a href="index.html">No Service</a></h1>
             </div>
             <button class="menu-button" onclick="toggleSidebar()">
                 <svg viewBox="0 0 24 24" class="menu-icon">
-                    <circle cx="12" cy="12" r="8" stroke="white" stroke-width="1" fill="none"/>
+                    <circle cx="12" cy="12" r="8" stroke="white" stroke-width="1" fill="none" />
                 </svg>
             </button>
         </aside>
@@ -128,7 +128,8 @@
                         <img src="images/page_no-service/Maps.jpg" alt="">
                     </div>
                     <p class="caption">
-                        Scalar map series of National Park Service (NPS) units and National Security Agency (NSA) bases; in order: global, national, coastal, regional, site
+                        Scalar map series of National Park Service (NPS) units and National Security Agency (NSA) bases;
+                        in order: global, national, coastal, regional, site
                     </p>
                 </div>
 
@@ -137,7 +138,8 @@
                         <img src="images/page_no-service/mheller_rpietrusko30.jpg" alt="">
                     </div>
                     <p class="caption">
-                        Planting detail for Pinus anonymous, the NPS Tor Project router to be installed throughout Timberline National Park
+                        Planting detail for Pinus anonymous, the NPS Tor Project router to be installed throughout
+                        Timberline National Park
                     </p>
                 </div>
 
@@ -146,7 +148,16 @@
                         <img src="images/page_no-service/mheller_rpietrusko03.jpg" alt="">
                     </div>
                     <p class="caption">
-                        Terrain map of electromagnetic bandwidth density across the National Radio Quiet Zone
+                        Map of electromagnetic bandwidth density across the National Radio Quiet Zone
+                    </p>
+                </div>
+
+                <div class="media-container">
+                    <div class="project-img">
+                        <img src="images/page_no-service/EM_Mesh-01.jpg" alt="">
+                    </div>
+                    <p class="caption">
+                        Electromagnetic terrain
                     </p>
                 </div>
 
