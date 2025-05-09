@@ -6,63 +6,13 @@
     <link rel="stylesheet" href="no_service.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>No Service</title>
+    <script src="sidebar.js"></script>
 </head>
-
-<script>
-    function toggleSidebar() {
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.querySelector('.menu-overlay');
-        const isVisible = sidebar.classList.contains('mobile-visible');
-    
-        if (isVisible) {
-            closeSidebar();
-        } else {
-            sidebar.classList.add('mobile-visible');
-            overlay.classList.add('active');
-        }
-    }
-    
-    function closeSidebar() {
-        document.querySelector('.sidebar').classList.remove('mobile-visible');
-        document.querySelector('.menu-overlay').classList.remove('active');
-    }
-    </script>
 
 <body>
     <div class="container">
-        <aside class="sidebar">
-            <h1><a href="index.html">No Service</a></h1>
-            <h3>A collection of urban and landscape computational design work</h3>
-            <br />
-            <nav>
-                <ul>
-                    <li><a href="project_auto-simulacrum.html">Auto-Simulacrum</a></li>
-                    <li><a href="project_siting-invisible-values.html">Siting Invisible Values</a></li>
-                    <li><a href="project_across-the-mainland.html">Across the Mainland</a></li>
-                    <li><a href="project_ibex.html">Ibex</a></li>
-                    <li><a href="project_metabolic-cities.html">Metabolic Cities</a></li>
-                    <li><a href="project_no-service.html">No Service</a></li>
-                    <li><a href="project_alphanumeric-sublime.html">Alphanumeric Sublime</a></li>
-                    <li><a href="project_light-test.html">Light Test</a></li>
-                </ul>
-            </nav>
-
-            <div class="about">
-                <hr />
-                <h3><a href="about.html">About</a></h3>
-            </div>
-        </aside>
-        
-        <aside class="header">
-            <div class="header-content">
-                <h1><a href="index.html">No Service</a></h1>
-            </div>
-            <button class="menu-button" onclick="toggleSidebar()">
-                <svg viewBox="0 0 24 24" class="menu-icon">
-                    <circle cx="12" cy="12" r="8" stroke="white" stroke-width="1" fill="none"/>
-                </svg>
-            </button>
-        </aside>
+        <aside id="sidebar-container" class="sidebar"></aside>
+        <div class="menu-overlay"></div>
 
         <main class="main-content">
 

@@ -307,7 +307,85 @@ footer {
 
 .menu-overlay {
     display: none;
+}
 
+
+/* ///////////// */
+/* LIGHTBOX STYLES */
+/* ///////////// */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    height: auto;
+    display: block;
+    border: 0.5px solid var(--border-color);
+    background-color: var(--background-color);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -35px;
+    right: 0;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-color);
+    user-select: none;
+}
+
+.lightbox-close:hover {
+    color: gray;
+}
+
+/* Add this to the existing CSS to indicate clickable images */
+.project-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-img img {
+    transition: all 0.2s ease;
+    display: block;
+}
+
+.project-img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: cornflowerblue;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.project-img:hover::after {
+    opacity: 0.1;
 }
 
 /* ////// */
