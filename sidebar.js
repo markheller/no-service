@@ -26,7 +26,7 @@ function generateSidebar() {
         <br />
         <nav>
             <ul>
-                <li><a href="project_every-tree-nyc.html">Every Tree NYC</a></li>    
+                <li><a href="project_every-tree-nyc.html">Every Tree NYC</a></li>
                 <li><a href="project_auto-simulacrum.html">Auto-Simulacrum</a></li>
                 <li><a href="project_siting-invisible-values.html">Siting Invisible Values</a></li>
                 <li><a href="project_across-the-mainland.html">Across the Mainland</a></li>
