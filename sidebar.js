@@ -1,8 +1,8 @@
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Create sidebar content
     generateSidebar();
-    
+
     // Set up mobile sidebar functionality
     setupMobileSidebar();
 });
@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
 function generateSidebar() {
     // Find the sidebar container
     const sidebarContainer = document.getElementById('sidebar-container');
-    
+
     if (!sidebarContainer) {
         console.error('Sidebar container not found!');
         return;
     }
-    
+
     // Create sidebar HTML content
     const sidebarContent = `
         <h1><a href="index.html">No Service</a></h1>
@@ -26,6 +26,7 @@ function generateSidebar() {
         <br />
         <nav>
             <ul>
+                <li><a href="project_every-tree-nyc.html">Every Tree NYC</a></li>    
                 <li><a href="project_auto-simulacrum.html">Auto-Simulacrum</a></li>
                 <li><a href="project_siting-invisible-values.html">Siting Invisible Values</a></li>
                 <li><a href="project_across-the-mainland.html">Across the Mainland</a></li>
@@ -42,7 +43,7 @@ function generateSidebar() {
             <h3><a href="about.html">About</a></h3>
         </div>
     `;
-    
+
     // Set the content
     sidebarContainer.innerHTML = sidebarContent;
 }
@@ -53,13 +54,13 @@ function generateSidebar() {
 function setupMobileSidebar() {
     // Create mobile header if it doesn't exist
     createMobileHeaderIfNeeded();
-    
+
     // Setup event listeners for toggling the sidebar
     const menuButton = document.querySelector('.menu-button');
     if (menuButton) {
         menuButton.addEventListener('click', toggleSidebar);
     }
-    
+
     // Setup overlay click to close sidebar
     const overlay = document.querySelector('.menu-overlay');
     if (overlay) {
@@ -74,12 +75,12 @@ function createMobileHeaderIfNeeded() {
     // Check if the header already exists
     if (!document.querySelector('.header')) {
         const container = document.querySelector('.container');
-        
+
         // Create the overlay for mobile
         const overlay = document.createElement('div');
         overlay.className = 'menu-overlay';
         document.body.appendChild(overlay);
-        
+
         // Create the header
         const header = document.createElement('aside');
         header.className = 'header';
@@ -93,7 +94,7 @@ function createMobileHeaderIfNeeded() {
                 </svg>
             </button>
         `;
-        
+
         // Insert the header at the beginning of the container
         if (container) {
             container.insertBefore(header, container.firstChild);
@@ -109,11 +110,11 @@ function createMobileHeaderIfNeeded() {
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.menu-overlay');
-    
+
     if (!sidebar || !overlay) return;
-    
+
     const isVisible = sidebar.classList.contains('mobile-visible');
-    
+
     if (isVisible) {
         closeSidebar();
     } else {
@@ -128,9 +129,9 @@ function toggleSidebar() {
 function closeSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.menu-overlay');
-    
+
     if (!sidebar || !overlay) return;
-    
+
     sidebar.classList.remove('mobile-visible');
     overlay.classList.remove('active');
 }
