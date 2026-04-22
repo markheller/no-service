@@ -32,7 +32,7 @@ function generateSidebar() {
                 <li><a href="project_across-the-mainland.html">Across the Mainland</a></li>
                 <li><a href="project_ibex.html">Ibex</a></li>
                 <li><a href="project_metabolic-cities.html">Metabolic Cities</a></li>
-                <li><a href="project_no-service.html">No Service</a></li>
+                // <li><a href="project_no-service.html">No Service</a></li>
                 <li><a href="project_alphanumeric-sublime.html">Alphanumeric Sublime</a></li>
                 <li><a href="project_light-test.html">Light Test</a></li>
             </ul>
