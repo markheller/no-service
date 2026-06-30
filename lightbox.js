@@ -1,92 +1,133 @@
-/**
- * Sets up image enlargement functionality
- * Creates a lightbox effect when clicking on images
- */
+let currentGallery = [];
+let currentIndex = 0;
 
-document.addEventListener('DOMContentLoaded', function() {
-    setupImageEnlargement();
+document.addEventListener('DOMContentLoaded', function () {
+    setupLightbox();
 });
 
-function setupImageEnlargement() {
-    // Create the lightbox container if it doesn't exist
-    if (!document.getElementById('lightbox-container')) {
-        const lightbox = document.createElement('div');
-        lightbox.id = 'lightbox-container';
-        lightbox.className = 'lightbox';
-        lightbox.innerHTML = `
-            <div class="lightbox-content">
-                <img id="lightbox-img" src="" alt="Enlarged image">
-                <div class="lightbox-close">&times;</div>
-            </div>
-        `;
-        document.body.appendChild(lightbox);
-        
-        // Set up close button functionality
-        const closeButton = lightbox.querySelector('.lightbox-close');
-        closeButton.addEventListener('click', closeLightbox);
-        
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox) {
-                closeLightbox();
+function setupLightbox() {
+    createLightbox();
+    attachImageHandlers();
+}
+
+function createLightbox() {
+    if (document.getElementById('lightbox-container')) return;
+
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox-container';
+    lightbox.className = 'lightbox';
+
+    lightbox.innerHTML = `
+    <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-close">&#x2715;</div>
+        <div class="lightbox-nav prev">&#60;</div>
+        <div class="lightbox-nav next">&#62;</div>
+    </div>
+`;
+
+    document.body.appendChild(lightbox);
+
+    lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    lightbox.querySelector('.lightbox-close')
+        .addEventListener('click', closeLightbox);
+
+    lightbox.querySelector('.next')
+        .addEventListener('click', nextImage);
+
+    lightbox.querySelector('.prev')
+        .addEventListener('click', prevImage);
+}
+
+function attachImageHandlers() {
+    const images = document.querySelectorAll('img');
+    const isHomepage = document.body.classList.contains('homepage');
+
+    images.forEach(img => {
+        const inLink = img.closest('a');
+        const inSlideshow = img.closest('.slideshow');
+        const noLightbox = img.closest('.no-lightbox');
+        const inMenuButton = img.closest('.menu-button');
+
+        if (inLink || noLightbox || inMenuButton) return;
+        if (inSlideshow && !isHomepage) return;
+
+        if (img.dataset.lightboxBound) return;
+        img.dataset.lightboxBound = 'true';
+
+        img.style.cursor = 'pointer';
+        img.addEventListener('dragstart', e => e.preventDefault());
+
+        img.addEventListener('click', () => {
+            if (inSlideshow && isHomepage && window.slideshowImages) {
+                currentGallery = window.slideshowImages.map(item => item.src);
+                currentIndex = window.slideshowIndex ?? 0;
+            } else {
+                currentGallery = [img.src];
+                currentIndex = 0;
             }
-        });
-    }
-    
-    // Add click event to all images in project sections
-    const projectImages = document.querySelectorAll('.project .image img, .project-img img');
-    projectImages.forEach(image => {
-        image.style.cursor = 'pointer';
-        image.addEventListener('click', function() {
-            openLightbox(this.src, this.alt);
+            openLightbox();
         });
     });
 }
 
-/**
- * Opens the lightbox with the specified image
- * @param {string} src - Source URL of the image
- * @param {string} alt - Alt text for the image
- */
-function openLightbox(src, alt) {
+function openLightbox() {
     const lightbox = document.getElementById('lightbox-container');
-    const lightboxImg = document.getElementById('lightbox-img');
-    
-    if (!lightbox || !lightboxImg) return;
-    
-    // Set image source and show lightbox
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || 'Enlarged image';
+    if (!lightbox) return;
+
+    // Show or hide arrows depending on gallery size
+    const isSingle = currentGallery.length <= 1;
+    lightbox.querySelector('.prev').style.display = isSingle ? 'none' : '';
+    lightbox.querySelector('.next').style.display = isSingle ? 'none' : '';
+
     lightbox.classList.add('active');
-    
-    // Prevent scrolling on the body
+    showLightboxImage(currentIndex);
+
     document.body.style.overflow = 'hidden';
-    
-    // Add keyboard event listener for escape key
-    document.addEventListener('keydown', handleLightboxKeydown);
+    document.addEventListener('keydown', handleKeydown);
 }
 
-/**
- * Handles keyboard events for the lightbox
- * @param {KeyboardEvent} e - Keyboard event
- */
-function handleLightboxKeydown(e) {
-    if (e.key === 'Escape') {
-        closeLightbox();
-    }
-}
-
-/**
- * Closes the lightbox
- */
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox-container');
-    
-    if (!lightbox) return;
-    
+    const img = document.getElementById('lightbox-img');
+
+    if (!lightbox || !img) return;
+
     lightbox.classList.remove('active');
+    img.src = '';
+
     document.body.style.overflow = '';
-    
-    // Remove keyboard event listener
-    document.removeEventListener('keydown', handleLightboxKeydown);
+    document.removeEventListener('keydown', handleKeydown);
+}
+
+function showLightboxImage(index) {
+    const src = currentGallery[index];
+    if (!src) return;
+
+    const img = document.getElementById('lightbox-img');
+    img.src = '';
+    setTimeout(() => {
+        img.src = src;
+    }, 10);
+}
+
+function nextImage() {
+    if (currentGallery.length <= 1) return;
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    showLightboxImage(currentIndex);
+}
+
+function prevImage() {
+    if (currentGallery.length <= 1) return;
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    showLightboxImage(currentIndex);
+}
+
+function handleKeydown(e) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
 }

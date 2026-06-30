@@ -1,139 +1,131 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Create sidebar content
     generateSidebar();
-
-    // Set up mobile sidebar functionality
     setupMobileSidebar();
 });
 
-/**
- * Generates the sidebar content and injects it into the DOM
- */
 function generateSidebar() {
-    // Find the sidebar container
     const sidebarContainer = document.getElementById('sidebar-container');
+    if (!sidebarContainer) return;
 
-    if (!sidebarContainer) {
-        console.error('Sidebar container not found!');
-        return;
-    }
-
-    // Create sidebar HTML content
-    const sidebarContent = `
-        <h1><a href="index.html">No Service</a></h1>
-        <h3>A collection of urban and landscape computational design work</h3>
-        <br />
-        <nav>
-            <ul>
-                <li><a href="project_every-tree-nyc.html">Every Tree NYC</a></li>
-                <li><a href="project_auto-simulacrum.html">Auto-Simulacrum</a></li>
-                <li><a href="project_siting-invisible-values.html">Siting Invisible Values</a></li>
-                <li><a href="project_across-the-mainland.html">Across the Mainland</a></li>
-                <li><a href="project_ibex.html">Ibex</a></li>
-                <li><a href="project_metabolic-cities.html">Metabolic Cities</a></li>
-                <li><a href="project_alphanumeric-sublime.html">Alphanumeric Sublime</a></li>
-                <li><a href="project_light-test.html">Light Test</a></li>
-            </ul>
-        </nav>
-
-        <div class="about">
-            <hr />
-            <h3><a href="about.html">About</a></h3>
+    sidebarContainer.innerHTML = `
+        <div class="logo-image">
+            <a href="index.html">
+                <img src="images/Logo.gif" alt="">
+            </a>
         </div>
+
+        <div class="sidebar-list sidebar-projects">
+            <a href="page_landscape-workshop.html">Landscape Workshop</a>
+            <a href="page_auto-simulacrum.html">Auto-Simulacrum</a>
+            <a href="page_siting-invisible-values.html">Siting Invisible Values</a>
+            <a href="page_across-the-mainland.html">Across the Mainland</a>
+            <a href="page_ibex.html">Ibex</a>
+            <a href="page_alphanumeric-sublime.html">Alphanumeric Sublime</a>
+            <a href="projects.html">All Projects</a>
+        </div>
+
+        <div class="sidebar-list sidebar-other">
+            <a href="services_data-visualization.html">Data Visualization</a>
+            <a href="services_computational-design.html">Computational Design</a>
+            <a href="services_exhibitions.html">Exhibitions</a>
+            <a href="services_cartography.html">Cartography</a>
+            <a href="services_drone-photogrammetry.html">Drone Photogrammetry</a>
+        </div>
+
+        <div class="sidebar-list sidebar-other">
+            <a href="writing.html">Writing</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <footer>
+            <p>©2026 DOT MAP, LLC</p>
+        </footer>
     `;
-    // <li><a href="project_no-service.html">No Service</a></li>
-
-
-
-    // Set the content
-    sidebarContainer.innerHTML = sidebarContent;
 }
 
-/**
- * Sets up mobile sidebar toggle functionality
- */
 function setupMobileSidebar() {
-    // Create mobile header if it doesn't exist
     createMobileHeaderIfNeeded();
 
-    // Setup event listeners for toggling the sidebar
-    const menuButton = document.querySelector('.menu-button');
-    if (menuButton) {
-        menuButton.addEventListener('click', toggleSidebar);
-    }
+    // Use event delegation so it works even after header is recreated
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.menu-button')) {
+            toggleSidebar();
+        }
+        if (e.target.closest('.menu-overlay')) {
+            closeSidebar();
+        }
+    });
 
-    // Setup overlay click to close sidebar
-    const overlay = document.querySelector('.menu-overlay');
-    if (overlay) {
-        overlay.addEventListener('click', closeSidebar);
-    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSidebar();
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeSidebar();
+            const header = document.querySelector('.header');
+            const overlay = document.querySelector('.menu-overlay');
+            if (header) header.remove();
+            if (overlay) overlay.remove();
+        } else {
+            createMobileHeaderIfNeeded();
+        }
+    });
 }
 
-/**
- * Creates the mobile header if it doesn't exist
- */
 function createMobileHeaderIfNeeded() {
-    // Check if the header already exists
-    if (!document.querySelector('.header')) {
-        const container = document.querySelector('.container');
+    if (window.innerWidth > 768) return;
 
-        // Create the overlay for mobile
+    // Create overlay if needed
+    if (!document.querySelector('.menu-overlay')) {
         const overlay = document.createElement('div');
         overlay.className = 'menu-overlay';
         document.body.appendChild(overlay);
+    }
 
-        // Create the header
+    // Create header (without menu button)
+    if (!document.querySelector('.header')) {
         const header = document.createElement('aside');
         header.className = 'header';
         header.innerHTML = `
-            <div class="header-content">
-                <h1><a href="index.html">No Service</a></h1>
+            <div class="header-inner">
+                <div class="logo-image">
+                    <a href="index.html">
+                        <img src="images/Logo.gif" alt="">
+                    </a>
+                </div>
             </div>
-            <button class="menu-button">
-                <svg viewBox="0 0 24 24" class="menu-icon">
-                    <circle cx="12" cy="12" r="8" stroke="white" stroke-width="1" fill="none"/>
-                </svg>
-            </button>
         `;
+        document.body.insertBefore(header, document.body.firstChild);
+    }
 
-        // Insert the header at the beginning of the container
-        if (container) {
-            container.insertBefore(header, container.firstChild);
-        } else {
-            document.body.insertBefore(header, document.body.firstChild);
-        }
+    // Create floating menu button (outside header)
+    if (!document.querySelector('.menu-button')) {
+        const menuBtn = document.createElement('button');
+        menuBtn.className = 'menu-button';
+        menuBtn.setAttribute('aria-label', 'Menu');
+        menuBtn.innerHTML = `<img src="images/menu.png" alt="Menu" class="menu-icon">`;
+        document.body.appendChild(menuBtn);
     }
 }
 
-/**
- * Toggles the sidebar visibility for mobile view
- */
+
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.menu-overlay');
-
     if (!sidebar || !overlay) return;
 
-    const isVisible = sidebar.classList.contains('mobile-visible');
-
-    if (isVisible) {
-        closeSidebar();
-    } else {
-        sidebar.classList.add('mobile-visible');
-        overlay.classList.add('active');
-    }
+    const open = sidebar.classList.toggle('mobile-visible');
+    overlay.classList.toggle('active', open);
+    document.body.classList.toggle('no-scroll', open);
 }
 
-/**
- * Closes the mobile sidebar
- */
 function closeSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.menu-overlay');
-
     if (!sidebar || !overlay) return;
 
     sidebar.classList.remove('mobile-visible');
     overlay.classList.remove('active');
+    document.body.classList.remove('no-scroll');
 }
